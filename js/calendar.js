@@ -9,7 +9,6 @@
 }(this, function($) {
 
     // default config
-    debugger;
     var defaults = {
 
             // 宽度
@@ -188,6 +187,7 @@
         var y = this.getFullYear(),
             m = this.getMonth() + 1,
             d = this.getDate();
+        console.log("--------");
         return exp.replace('yyyy', y).replace('mm', m).replace('dd', d);
     }
 
@@ -249,7 +249,7 @@
     }
 
     Date.getPrevMonth = function(y, m, n) {
-        console.log(1111);
+        //console.log(1111);
         return this.getSiblingsMonth(y, m, 0 - (n || 1));
     }
 
@@ -431,7 +431,8 @@
         },
         setMonthAction: function(y) {
             var m = this.date.getMonth() + 1;
-
+            // console.log("year this");
+            f();
             this.$monthItems.children().removeClass(TODAY_CLASS);
             if (y === this.date.getFullYear()) {
                 this.$monthItems.children().eq(m - 1).addClass(TODAY_CLASS);
@@ -449,7 +450,7 @@
         updateDisDate: function(y, m) {
             this.$disDate.html(DATE_DIS_TPL.repeat({
                 year: y,
-                month: m
+                month: m,
             }));
         },
         updateDisMonth: function(y) {
@@ -496,6 +497,7 @@
             });
 
             $(document).click(function(e) {
+                console.log("909090909");
                 if (_this.$trigger[0] != e.target && !$.contains($this[0], e.target)) {
                     $this.hide();
                 }
