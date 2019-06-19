@@ -476,7 +476,8 @@
                 // console.log($item);
                 this.$dateItems.append($item);
             }
-            console.log("在这变成了日");
+            setCurrentmonth(m);
+            retuenday();
         },
         hide: function(view, date, data) {
             this.$trigger.val(date.format(this.options.format));
@@ -824,6 +825,7 @@ $(function(){
 //
 function getcalendar (){
     changeMonth=13;
+    mycalendar=null;
     $.getJSON("https://raw.githack.com/1260408088/static/master/calendar.json", function(data){
         mycalendar = data;
         // 然后继续用content就行了

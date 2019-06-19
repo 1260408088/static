@@ -20,7 +20,6 @@
 <body>
 <div id="demo">
     <div id="ca" style="position: absolute">
-        <img src="need.png" style="width: 98px;">
     </div>
 
 
@@ -42,10 +41,17 @@
                 var fulltime = year+"-"+month+"-"+day;
                 var keytime= year + "-" + (date.getMonth()+1);
                 let mycalendarElement = mycalendar[keytime];
+                $("#toast").hide();
+                $("#toast a").remove();
                 for (var i=0;i<mycalendarElement.length;i++){
                     let ordertime = mycalendarElement[i]["date"].substring(0,10);
                     if(fulltime == ordertime){
-                        console.log(mycalendarElement[i]["title"]);
+                        console.log(fulltime)
+                        console.log(ordertime)
+                        $("#toast").show();
+                        var title=mycalendarElement[i]["title"];
+                        $("#toast").append('<a href="">'+title+'</a>');
+
                         console.log(mycalendarElement[i]["link"]);
                     }
                 }
@@ -60,9 +66,12 @@
         var currentyear = getCurrentyear();
         var currentmonth = getCurrentmonth();
         console.log(currentyear, currentmonth);
+        gblmonth=currentmonth;
         if (currentmonth == 13) { // 首次加载，需要延时
             setCurrentmonth(1); // 首次以后不延时直接执行
             setTimeout(function () {
+                $("#ca").append('<div id="toast" style="background-image:need.png;width:98px;position:absolute;z-index:25;top:14px;left:75px">');
+                $("#toast").hide();
                 if (mycalendar) {
                     monthTag(currentyear);
                 } else {
@@ -114,6 +123,7 @@
 
     // 对月份下的日期进行渲染
     function resolveday(month, mycalValue) {
+        $("#toast").hide();
         console.log("mycal------------" + mycalValue);
         let attr = $("#cal" + month).children("li");
         jQuery.each(attr, function () {
@@ -128,10 +138,17 @@
     }
 
     function nextMonth() {
+        $("#toast").hide();
         monthTag(getCurrentyear(), getCurrentmonth());
     }
     function preMonth() {
+        $("#toast").hide();
         monthTag(getCurrentyear(), getCurrentmonth());
+    }
+    function retuenday() {
+      if(mycalendar){
+          monthTag(getCurrentyear(),getCurrentmonth());
+      }
     }
 </script>
 </body>
