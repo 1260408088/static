@@ -1,4 +1,5 @@
 (function(root, factory) {
+    getcalendar();
     if (typeof define === 'function' && define.amd) {
         define('calendar', ['jquery'], factory);
     } else if (typeof exports === 'object') {
@@ -105,6 +106,7 @@
         OLD_DAY_CLASS = 'old',
         NEW_DAY_CLASS = 'new',
         TODAY_CLASS = 'now',
+        HAVE_CLASS = "have",
         SELECT_CLASS = 'selected',
         MARK_DAY_HTML = '<i class="dot"></i>',
         DATE_DIS_TPL = '{year}/<span class="m">{month}</span>',
@@ -347,9 +349,11 @@
             return $item;
         },
         getDaysHtml: function(y, m) {
+            console.log("0000000"+m);
             var year, month, firstWeek, daysNum, prevM, prevDiff,
                 dt = this.date,
-                $days = $('<ol class="days"></ol>');
+
+                $days = $('<ol id='+'cal'+m +" "+ 'class="days"></ol>'); // 为月份下的日子添加id
 
             if (isDate(y)) {
                 year = y.getFullYear();
@@ -385,7 +389,7 @@
                 $days.append(this.getDayItem(nextM.y, nextM.m, n, NEXT_FLAG));
             }
 
-            return $('<li></li>').width(this.options.width).append($days);
+            return $('<li id="calM"></li>').width(this.options.width).append($days);
         },
         getWeekHtml: function() {
             var week = [],
@@ -431,8 +435,9 @@
         },
         setMonthAction: function(y) {
             var m = this.date.getMonth() + 1;
-            // console.log("year this");
-            f();
+            console.log("year this");
+            setCurrentyear(y); // 全局变量设置当前所在的year
+            resolveyear(); // 对年份中的月进行解析
             this.$monthItems.children().removeClass(TODAY_CLASS);
             if (y === this.date.getFullYear()) {
                 this.$monthItems.children().eq(m - 1).addClass(TODAY_CLASS);
@@ -468,6 +473,7 @@
             this.$dateItems.html('');
             for (var i = 0; i < 3; i++) {
                 var $item = this.getDaysHtml(ma[i].y, ma[i].m);
+                console.log($item);
                 this.$dateItems.append($item);
             }
 
@@ -546,10 +552,13 @@
                         }, 300, 'swing', function() {
                             $dis.children(':last').remove();
                             $dis.prepend($prevItem).css('margin-left', '-100%');
-
                             $.isFunction(cb) && cb.call(_this);
                         });
-                        console.log("00000");
+                        // 自定义函数 获得当前的年份与月份，设置给全局变量
+                        setCurrentmonth(m);
+                        setCurrentyear(y);
+                        console.log("月份向前");
+                        preMonth();
                     },
                     next: function() { // 月份向后
                         var nm = Date.getNextMonth(y, m),
@@ -567,7 +576,12 @@
 
                             $.isFunction(cb) && cb.call(_this);
                         });
-                        console.log("11111");
+                        console.log("月份向后");
+                        console.log("month:"+m+"--------"+"year:"+y);
+                        // 自定义函数 获得当前的年份与月份，设置给全局变量
+                        setCurrentmonth(m);
+                        setCurrentyear(y);
+                        nextMonth();
                     }
                 };
 
@@ -783,5 +797,49 @@
     }
 
     $.fn.calendar.defaults = defaults;
-
 }));
+
+function setCurrentyear(y) { // 设置year
+    changeYear = y;
+}
+function getCurrentyear() { // 取出year
+    return changeYear;
+}
+function getCurrentmonth() {
+    return changeMonth;
+}
+function setCurrentmonth(m) {
+    changeMonth=m;
+}
+function removeHaveClass() { // 删除月份的样式
+    $(".calendar-ct.month-items").children().removeClass("have");
+}
+function addHaveClass(m) { // 为月份添加样式
+    $(".calendar-ct.month-items").children().eq(m-1).addClass("have");
+}
+$(function(){
+
+
+});
+//
+function getcalendar (){
+    changeMonth=13;
+    $.getJSON("https://raw.githack.com/1260408088/static/master/calendar.json", function(data){
+        mycalendar = data;
+        // 然后继续用content就行了
+        console.log(mycalendar);
+    })
+   /* $.ajax({
+        url:"https://raw.githack.com/1260408088/static/master/calendar.json",
+        type:"GET",
+        dataType: "json",
+        success:function(data){
+            mycalendar = data; // 获得json数据先获得
+            var year = data["2019-5"];
+            console.log(year);
+        },
+        error:function(){
+            alert("数据加载错误!");
+        }
+    });*/
+}
