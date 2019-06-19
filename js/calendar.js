@@ -473,10 +473,10 @@
             this.$dateItems.html('');
             for (var i = 0; i < 3; i++) {
                 var $item = this.getDaysHtml(ma[i].y, ma[i].m);
-                console.log($item);
+                // console.log($item);
                 this.$dateItems.append($item);
             }
-
+            console.log("在这变成了日");
         },
         hide: function(view, date, data) {
             this.$trigger.val(date.format(this.options.format));

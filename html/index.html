@@ -19,7 +19,11 @@
 </head>
 <body>
 <div id="demo">
-    <div id="ca"></div>
+    <div id="ca" style="position: absolute">
+        <img src="need.png" style="width: 98px;">
+    </div>
+
+
 </div>
 <script src="../js/jquery.js"></script>
 <script src="../js/calendar.js"></script>
@@ -31,6 +35,20 @@
             if (view == "month") {
                 let fullYear = date.getFullYear();
                 monthTag(fullYear, date.getMonth()+1);
+            }else{
+                let year = date.getFullYear();
+                let month = date.getMonth()+1 < 10 ? "0"+(date.getMonth()+1) : date.getMonth()+1;
+                let day = date.getDate() < 10 ? "0"+date.getDate():date.getDate();
+                var fulltime = year+"-"+month+"-"+day;
+                var keytime= year + "-" + (date.getMonth()+1);
+                let mycalendarElement = mycalendar[keytime];
+                for (var i=0;i<mycalendarElement.length;i++){
+                    let ordertime = mycalendarElement[i]["date"].substring(0,10);
+                    if(fulltime == ordertime){
+                        console.log(mycalendarElement[i]["title"]);
+                        console.log(mycalendarElement[i]["link"]);
+                    }
+                }
             }
             /*console.log('view:' + view);
             alert('date:' + date);
