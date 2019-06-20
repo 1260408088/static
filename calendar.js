@@ -853,6 +853,6 @@ function getcalendar (){
     });*/
 }
 function transfinsh() {
-    $("#finsh").toggle("slow");
-    $("#coustomerCal").toggle("slow");
+    $("#finsh").fadeToggle("slow");
+    $("#coustomerCal").fadeToggle("slow");
 }

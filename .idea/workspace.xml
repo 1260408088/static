@@ -33,7 +33,7 @@
         <entry file="file://$PROJECT_DIR$/calendar.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="492">
-              <caret line="856" column="38" lean-forward="true" selection-start-line="856" selection-start-column="38" selection-end-line="856" selection-end-column="38" />
+              <caret line="856" column="42" lean-forward="true" selection-start-line="856" selection-start-column="42" selection-end-line="856" selection-end-column="42" />
             </state>
           </provider>
         </entry>
@@ -194,12 +194,12 @@
       <updated>1560868013601</updated>
       <workItem from="1560868015757" duration="5063000" />
       <workItem from="1560951976134" duration="11700000" />
-      <workItem from="1561042211888" duration="2469000" />
+      <workItem from="1561042211888" duration="3072000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44896000" />
+    <option name="totallyTimeSpent" value="45499000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
@@ -328,7 +328,7 @@
     <entry file="file://$PROJECT_DIR$/calendar.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="492">
-          <caret line="856" column="38" lean-forward="true" selection-start-line="856" selection-start-column="38" selection-end-line="856" selection-end-column="38" />
+          <caret line="856" column="42" lean-forward="true" selection-start-line="856" selection-start-column="42" selection-end-line="856" selection-end-column="42" />
         </state>
       </provider>
     </entry>
