@@ -9,9 +9,6 @@
     border: 1px solid #e8e8e8;
     box-shadow: 1px 2px 3px #ddd
 }
-.have{
-    !important;color: #FF808E;
-}
 .calendar-inner {
     position: relative;
     z-index: 1;
@@ -202,14 +199,11 @@
     margin: auto;
     white-space: nowrap;
     overflow: hidden;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius:20px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius:40px;
     border-bottom-left-radius:0px;
-    border-top-left-radius:20px;
+    border-top-left-radius:40px;
 }
-.linkpage{
-    !important;text-decoration:none;
-    font-family: "等线 Light";
-    !important;color: #fff;
-    font-size: 13px;
+.have{
+    color: #FFF!important;
 }

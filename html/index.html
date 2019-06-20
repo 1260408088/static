@@ -55,8 +55,7 @@
                         $(".toast").show();
                         var title = mycalendarElement[i]["title"];
                         var link = head + mycalendarElement[i]["link"];
-                        $("#toast").append('<a class="linkpage" href="' + link + '">' + '<marquee scrollamount=5 onMouseOut="this.start()" onMouseOver="this.stop()">' + title + '</marquee></a><br/>');
-
+                        $("#toast").append('<a style="text-decoration:none;border-bottom-color:#fff;font-family:等线 Light;color: #fff;font-size: 13px;"' + 'href="' + link + '">' + '<marquee scrollamount=5 onMouseOut="this.start()" onMouseOver="this.stop()">' + title + '</marquee></a><br/>');
                         console.log(mycalendarElement[i]["link"]);
                     }
                 }
