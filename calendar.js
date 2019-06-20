@@ -826,7 +826,7 @@ function addHaveClass(m) { // 为月份添加样式
     console.log("这是为什么触发的");
 }
 $(function(){
-
+    $("#finsh").hide();
 });
 //
 function getcalendar (){
@@ -851,4 +851,8 @@ function getcalendar (){
             alert("数据加载错误!");
         }
     });*/
+}
+function transfinsh() {
+    $("#finsh").toggle();
+    $("#coustomerCal").toggle();
 }
