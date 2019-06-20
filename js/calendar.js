@@ -813,10 +813,10 @@ function setCurrentmonth(m) {
     changeMonth=m;
 }
 function removeHaveClass() { // 删除月份的样式
-    $(".calendar-ct.month-items").children().removeClass("have li");
+    $(".calendar-ct.month-items").children().removeClass("have");
 }
 function addHaveClass(m) { // 为月份添加样式
-    $(".calendar-ct.month-items").children().eq(m-1).addClass("have li");
+    $(".calendar-ct.month-items").children().eq(m-1).addClass("have");
 }
 $(function(){
 
