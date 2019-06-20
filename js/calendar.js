@@ -826,7 +826,7 @@ $(function(){
 function getcalendar (){
     changeMonth=13;
     mycalendar=null;
-    $.getJSON("https://raw.githack.com/1260408088/static/master/calendar.json", function(data){
+    $.getJSON("https://raw.githack.com/1260408088/static/master/json/calendar.json", function(data){
         mycalendar = data;
         // 然后继续用content就行了
         console.log(mycalendar);

@@ -162,7 +162,7 @@
                 }else {
                     var dayVal = jQuery(this).text();
                     if (mycalValue.indexOf(dayVal) > -1) { // 存在于数组之中,给当天的日期加一个样式
-                        jQuery(this).addClass("have");
+                        jQuery(this).css("color","#FF808E");
                     }
                 }
             });
@@ -170,6 +170,7 @@
     }
     
     function judgeMonth(currentyear,month) { // 解析当前年份与月份中存在的文章
+        console.log("为什么不出现:"+currentyear+"----------"+month);
         var Value = new Array();
         if (mycalendar[currentyear + "-" + month]) {
             for (var j = 0; j < mycalendar[currentyear + "-" + month].length; j++) {

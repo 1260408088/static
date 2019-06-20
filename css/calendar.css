@@ -208,8 +208,8 @@
     border-top-left-radius:20px;
 }
 .linkpage{
-    text-decoration:none;
+    !important;text-decoration:none;
     font-family: "等线 Light";
-    color: #fff;
+    !important;color: #fff;
     font-size: 13px;
 }
