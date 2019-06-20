@@ -123,25 +123,69 @@
                 }
             }
         }
-        resolveday(month, mycalValue);
+        resolveday(month, mycalValue, currentyear);
     }
 
     // 对月份下的日期进行渲染
-    function resolveday(month, mycalValue) {
+    function resolveday(month, mycalValue, currentyear) {
         $(".toast").hide();
         console.log("mycal------------" + mycalValue);
+        var precurrentyear=currentyear;
+        var nextcurrentyear=currentyear;
         let attr = $("#cal" + month).children("li");
-        jQuery.each(attr, function () {
-            let emptclass = jQuery(this).attr("class");
-            if (!emptclass) {
-                var dayVal = jQuery(this).text();
-                if (mycalValue.indexOf(dayVal) > -1) { // 存在于数组之中,给当天的日期加一个样式
-                    jQuery(this).addClass("have");
+        var preMonth = month - 1 > 0 ? month - 1 : 12;
+        var nextMonth = month + 1 > 12 ? 1 : month + 1;
+        if (preMonth==12) {
+            precurrentyear = currentyear - 1;
+        }
+        if(nextMonth==1){
+            nextMonth = currentyear + 1;
+        }
+        // if (preMonth != 1 && nextMonth != 1) { // 没有年份的跳跃
+            var prevalue =judgeMonth(precurrentyear,preMonth); // 前一个月存在的数据
+            var nextvalue =judgeMonth(nextcurrentyear,nextMonth); // 后一个月存在的数据
+            jQuery.each(attr, function () {
+                let emptclass = jQuery(this).attr("class");
+                console.log(emptclass);
+                if (emptclass) {
+                    if(emptclass=="old"){ // 前一个月的数据
+                     var dayVal = jQuery(this).text();
+                     if (prevalue.indexOf(dayVal) > -1) { // 存在于数组之中,给当天的日期加一个样式
+                         jQuery(this).css("color","#FF808E");
+                     }
+                 } else if(emptclass=="new"){
+                    var dayVal = jQuery(this).text();
+                    if (nextvalue.indexOf(dayVal) > -1) { // 存在于数组之中,给当天的日期加一个样式
+                        jQuery(this).css("color","#FF808E");
+                    }
+                 }
+                }else {
+                    var dayVal = jQuery(this).text();
+                    if (mycalValue.indexOf(dayVal) > -1) { // 存在于数组之中,给当天的日期加一个样式
+                        jQuery(this).addClass("have");
+                    }
                 }
-            }
-        });
+            });
+        // }
     }
-
+    
+    function judgeMonth(currentyear,month) { // 解析当前年份与月份中存在的文章
+        var Value = new Array();
+        if (mycalendar[currentyear + "-" + month]) {
+            for (var j = 0; j < mycalendar[currentyear + "-" + month].length; j++) {
+                var pagedata = mycalendar[currentyear + "-" + month][j];
+                var needdate = pagedata["date"].substring(8, 10);
+                if (needdate < 10) {
+                    needdate = needdate.replace(0, "");
+                }
+                Value[j] = needdate; // 存到一个数组中备用
+            }
+        }
+        console.log("judgeMonth:"+Value);
+        return Value;
+    }
+    
+    // 相对当前月份的上一月与下一月判断解析
     function nextMonth() {
         $(".toast").hide();
         monthTag(getCurrentyear(), getCurrentmonth());
