@@ -27,30 +27,35 @@
 <script src="../js/jquery.js"></script>
 <script src="../js/calendar.js"></script>
 <script>
+    $(function () {
+        head = "https://1260408088.github.io";
+    });
     $('#ca').calendar({
-        width: 250,
-        height: 250,
+        width: 200,
+        height: 200,
         onSelected: function (view, date, data) {   // 点击事件
             if (view == "month") {
                 let fullYear = date.getFullYear();
-                monthTag(fullYear, date.getMonth()+1);
-            }else{
+                monthTag(fullYear, date.getMonth() + 1);
+            } else {
                 let year = date.getFullYear();
-                let month = date.getMonth()+1 < 10 ? "0"+(date.getMonth()+1) : date.getMonth()+1;
-                let day = date.getDate() < 10 ? "0"+date.getDate():date.getDate();
-                var fulltime = year+"-"+month+"-"+day;
-                var keytime= year + "-" + (date.getMonth()+1);
+                let month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+                let day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+                var fulltime = year + "-" + month + "-" + day;
+                var keytime = year + "-" + (date.getMonth() + 1);
                 let mycalendarElement = mycalendar[keytime];
-                $("#toast").hide();
+                $(".toast").hide();
                 $("#toast a").remove();
-                for (var i=0;i<mycalendarElement.length;i++){
-                    let ordertime = mycalendarElement[i]["date"].substring(0,10);
-                    if(fulltime == ordertime){
+                $("#toast br").remove();
+                for (var i = 0; i < mycalendarElement.length; i++) {
+                    let ordertime = mycalendarElement[i]["date"].substring(0, 10);
+                    if (fulltime == ordertime) {
                         console.log(fulltime)
                         console.log(ordertime)
-                        $("#toast").show();
-                        var title=mycalendarElement[i]["title"];
-                        $("#toast").append('<a href="">'+title+'</a>');
+                        $(".toast").show();
+                        var title = mycalendarElement[i]["title"];
+                        var link = head + mycalendarElement[i]["link"];
+                        $("#toast").append('<a class="linkpage" href="' + link + '">' + '<marquee scrollamount=5 onMouseOut="this.start()" onMouseOver="this.stop()">' + title + '</marquee></a><br/>');
 
                         console.log(mycalendarElement[i]["link"]);
                     }
@@ -66,12 +71,12 @@
         var currentyear = getCurrentyear();
         var currentmonth = getCurrentmonth();
         console.log(currentyear, currentmonth);
-        gblmonth=currentmonth;
+        gblmonth = currentmonth;
         if (currentmonth == 13) { // 首次加载，需要延时
             setCurrentmonth(1); // 首次以后不延时直接执行
             setTimeout(function () {
-                $("#ca").append('<div id="toast" style="background-image:need.png;width:98px;position:absolute;z-index:25;top:14px;left:75px">');
-                $("#toast").hide();
+                $("#ca").append('<div id="toast" class="toast"></div>');
+                $(".toast").hide();
                 if (mycalendar) {
                     monthTag(currentyear);
                 } else {
@@ -104,7 +109,7 @@
 
                 if (flag) { // 只在内部循环一次，当前页的数据后就不再管了
                     flag = false;
-                    if(mycalendar[currentyear + "-" + month]){
+                    if (mycalendar[currentyear + "-" + month]) {
                         for (var j = 0; j < mycalendar[currentyear + "-" + month].length; j++) {
                             var pagedata = mycalendar[currentyear + "-" + month][j];
                             var needdate = pagedata["date"].substring(8, 10);
@@ -123,7 +128,7 @@
 
     // 对月份下的日期进行渲染
     function resolveday(month, mycalValue) {
-        $("#toast").hide();
+        $(".toast").hide();
         console.log("mycal------------" + mycalValue);
         let attr = $("#cal" + month).children("li");
         jQuery.each(attr, function () {
@@ -138,17 +143,19 @@
     }
 
     function nextMonth() {
-        $("#toast").hide();
+        $(".toast").hide();
         monthTag(getCurrentyear(), getCurrentmonth());
     }
+
     function preMonth() {
-        $("#toast").hide();
+        $(".toast").hide();
         monthTag(getCurrentyear(), getCurrentmonth());
     }
+
     function retuenday() {
-      if(mycalendar){
-          monthTag(getCurrentyear(),getCurrentmonth());
-      }
+        if (mycalendar) {
+            monthTag(getCurrentyear(), getCurrentmonth());
+        }
     }
 </script>
 </body>
