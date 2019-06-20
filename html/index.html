@@ -15,6 +15,10 @@
             padding: 0;
             margin: 0;
         }
+        #demo {
+            width: 300px;
+            margin: 150px auto;
+        }
     </style>
 </head>
 <body>
@@ -50,8 +54,8 @@
                 for (var i = 0; i < mycalendarElement.length; i++) {
                     let ordertime = mycalendarElement[i]["date"].substring(0, 10);
                     if (fulltime == ordertime) {
-                        console.log(fulltime)
-                        console.log(ordertime)
+                        console.log(fulltime);
+                        console.log(ordertime);
                         $(".toast").show();
                         var title = mycalendarElement[i]["title"];
                         var link = head + mycalendarElement[i]["link"];
@@ -77,7 +81,7 @@
                 $("#ca").append('<div id="toast" class="toast"></div>');
                 $(".toast").hide();
                 if (mycalendar) {
-                    monthTag(currentyear);
+                    monthTag(currentyear,null);
                 } else {
                     alert("网络有问题的，云日历功能不能使用....");
                 }
@@ -88,7 +92,7 @@
     }
 
     // 对月份进行设置，json文件中存在的才显示
-    function monthTag(currentyear, date) {
+    function monthTag(currentyear, date) { // flag判断是否要加样式，不能加错了样式
         removeHaveClass();
         // debugger;
         var flag = true;
@@ -201,6 +205,17 @@
             monthTag(getCurrentyear(), getCurrentmonth());
         }
     }
+    /*function monthInyear() {
+        removeHaveClass();
+        console.log("重写的方法也不行？？？？？");
+        var currentyear=getCurrentyear();
+        for (let i = 1; i <= 12; i++) {
+            if (mycalendar[currentyear + "-" + i]) {
+                console.log(mycalendar[currentyear + "-" + i]);
+                addHaveClass(i);
+            }
+        }
+    }*/
 </script>
 </body>
 </html>

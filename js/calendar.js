@@ -437,7 +437,13 @@
             var m = this.date.getMonth() + 1;
             console.log("year this");
             setCurrentyear(y); // 全局变量设置当前所在的year
-            resolveyear(); // 对年份中的月进行解析
+            //if(loadFlag==0){
+                resolveyear(); // 对年份中的月进行解析
+                //loadFlag=1;
+            //}else{
+                // 对年份下的月，再解析一次
+                //monthInyear();
+            // }
             this.$monthItems.children().removeClass(TODAY_CLASS);
             if (y === this.date.getFullYear()) {
                 this.$monthItems.children().eq(m - 1).addClass(TODAY_CLASS);
@@ -817,13 +823,14 @@ function removeHaveClass() { // 删除月份的样式
 }
 function addHaveClass(m) { // 为月份添加样式
     $(".calendar-ct.month-items").children().eq(m-1).addClass("have have2 have3 have4");
+    console.log("这是为什么触发的");
 }
 $(function(){
-
 
 });
 //
 function getcalendar (){
+    loadFlag=0;
     changeMonth=13;
     mycalendar=null;
     $.getJSON("https://raw.githack.com/1260408088/static/master/json/calendar.json", function(data){
