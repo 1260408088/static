@@ -858,5 +858,5 @@ function getcalendar (){
 function transfinsh() {
     $("#finsh").fadeToggle("slow");
     $("#coustomerCal").fadeToggle("slow");
-    $(".toast").fadeIn("slow");
+    $(".toast").hide("slow");
 }
