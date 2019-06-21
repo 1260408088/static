@@ -827,6 +827,9 @@ function addHaveClass(m) { // 为月份添加样式
 }
 $(function(){
     $("#finsh").hide();
+    $(document).on('click', '.sidebar-toggle-line-wrap', function(e){
+        $(".toast").hide();
+    });
 });
 //
 function getcalendar (){
@@ -855,4 +858,5 @@ function getcalendar (){
 function transfinsh() {
     $("#finsh").fadeToggle("slow");
     $("#coustomerCal").fadeToggle("slow");
+    $(".toast").fadeIn("slow");
 }
