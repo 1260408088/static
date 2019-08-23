@@ -189,6 +189,7 @@
         var y = this.getFullYear(),
             m = this.getMonth() + 1,
             d = this.getDate();
+        console.log("--------");
         return exp.replace('yyyy', y).replace('mm', m).replace('dd', d);
     }
 
@@ -250,6 +251,7 @@
     }
 
     Date.getPrevMonth = function(y, m, n) {
+        //console.log(1111);
         return this.getSiblingsMonth(y, m, 0 - (n || 1));
     }
 
@@ -347,6 +349,7 @@
             return $item;
         },
         getDaysHtml: function(y, m) {
+            console.log("0000000"+m);
             var year, month, firstWeek, daysNum, prevM, prevDiff,
                 dt = this.date,
 
@@ -432,6 +435,7 @@
         },
         setMonthAction: function(y) {
             var m = this.date.getMonth() + 1;
+            console.log("year this");
             setCurrentyear(y); // 全局变量设置当前所在的year
             //if(loadFlag==0){
                 resolveyear(); // 对年份中的月进行解析
@@ -475,6 +479,7 @@
             this.$dateItems.html('');
             for (var i = 0; i < 3; i++) {
                 var $item = this.getDaysHtml(ma[i].y, ma[i].m);
+                // console.log($item);
                 this.$dateItems.append($item);
             }
             setCurrentmonth(m);
@@ -505,6 +510,7 @@
             });
 
             $(document).click(function(e) {
+                console.log("909090909");
                 if (_this.$trigger[0] != e.target && !$.contains($this[0], e.target)) {
                     $this.hide();
                 }
@@ -558,6 +564,7 @@
                         // 自定义函数 获得当前的年份与月份，设置给全局变量
                         setCurrentmonth(m);
                         setCurrentyear(y);
+                        console.log("月份向前");
                         preMonth();
                     },
                     next: function() { // 月份向后
@@ -576,8 +583,8 @@
 
                             $.isFunction(cb) && cb.call(_this);
                         });
-                       
-                        
+                        console.log("月份向后");
+                        console.log("month:"+m+"--------"+"year:"+y);
                         // 自定义函数 获得当前的年份与月份，设置给全局变量
                         setCurrentmonth(m);
                         setCurrentyear(y);
@@ -816,13 +823,13 @@ function removeHaveClass() { // 删除月份的样式
 }
 function addHaveClass(m) { // 为月份添加样式
     $(".calendar-ct.month-items").children().eq(m-1).addClass("have have2 have3 have4");
-
+    console.log("这是为什么触发的");
 }
 $(function(){
     $("#finsh").hide();
-   /* $(document).on('click', '.sidebar-toggle-line-wrap', function(e){
+    $(document).on('click', '.sidebar-toggle-line-wrap', function(e){
         $(".toast").hide();
-    });*/
+   });
 });
 //
 function getcalendar (){
@@ -832,6 +839,7 @@ function getcalendar (){
     $.getJSON("https://raw.githack.com/1260408088/1260408088.github.io/master/calendar.json", function(data){
         mycalendar = data;
         // 然后继续用content就行了
+        console.log(mycalendar);
     })
    /* $.ajax({
         url:"https://raw.githack.com/1260408088/static/master/calendar.json",
@@ -850,5 +858,5 @@ function getcalendar (){
 function transfinsh() {
     $("#finsh").fadeToggle("slow");
     $("#coustomerCal").fadeToggle("slow");
-    $(".toast").fadeIn("slow");
+    $(".toast").hide("slow");
 }
