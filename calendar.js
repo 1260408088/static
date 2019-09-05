@@ -856,5 +856,4 @@ function transfinsh() {
     $("#finsh").fadeToggle("slow");
     $("#coustomerCal").fadeToggle("slow");
     $(".toast").fadeIn("slow");
-	$("#imgbtn").css("display":"none");
 }
